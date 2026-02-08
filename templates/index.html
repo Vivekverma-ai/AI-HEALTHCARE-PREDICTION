@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Health Disease Detector</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="background"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo-section">
+                <div class="logo">🏥</div>
+                <div>
+                    <h1>Health Pulse</h1>
+                    <p class="subtitle">AI-Powered Health Risk Detection</p>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main id="formContainer" class="main-content">
+            <div class="form-wrapper">
+                <div class="form-header">
+                    <h2>Health Assessment Form</h2>
+                    <p>Enter your health details for AI analysis</p>
+                </div>
+
+                <!-- Form -->
+                <form id="healthForm" class="health-form">
+                    <!-- Personal Information Section -->
+                    <fieldset class="form-section">
+                        <legend>Personal Information</legend>
+
+                        <div class="form-group">
+                            <label for="age">Age <span class="required">*</span></label>
+                            <input type="number" id="age" name="age" placeholder="e.g., 35" min="1" max="150" required>
+                            <span class="error-message" id="ageError"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="gender">Gender <span class="required">*</span></label>
+                            <select id="gender" name="gender" required>
+                                <option value="">Select your gender</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
+                            <span class="error-message" id="genderError"></span>
+                        </div>
+                    </fieldset>
+
+                    <!-- Physical Metrics Section -->
+                    <fieldset class="form-section">
+                        <legend>Physical Metrics</legend>
+
+                        <div class="form-group">
+                            <label for="bmi">BMI (Body Mass Index) <span class="required">*</span></label>
+                            <input type="number" id="bmi" name="bmi" placeholder="e.g., 24.5" step="0.1" min="10"
+                                max="100" required>
+                            <span class="info-text">BMI = Weight(kg) / Height(m)²</span>
+                            <span class="error-message" id="bmiError"></span>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="bp_systolic">Systolic BP <span class="required">*</span></label>
+                                <input type="number" id="bp_systolic" name="bp_systolic" placeholder="e.g., 120"
+                                    min="50" max="250" required>
+                                <span class="unit">mmHg</span>
+                                <span class="error-message" id="bpSystolicError"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="bp_diastolic">Diastolic BP <span class="required">*</span></label>
+                                <input type="number" id="bp_diastolic" name="bp_diastolic" placeholder="e.g., 80"
+                                    min="30" max="150" required>
+                                <span class="unit">mmHg</span>
+                                <span class="error-message" id="bpDiastolicError"></span>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <!-- Blood Sugar Section -->
+                    <fieldset class="form-section">
+                        <legend>Blood Metrics</legend>
+
+                        <div class="form-group">
+                            <label for="blood_sugar">Blood Sugar Level <span class="required">*</span></label>
+                            <input type="number" id="blood_sugar" name="blood_sugar" placeholder="e.g., 120" step="0.1"
+                                min="40" max="600" required>
+                            <span class="unit">mg/dL</span>
+                            <span class="info-text">Normal fasting: 70-100 mg/dL</span>
+                            <span class="error-message" id="bloodSugarError"></span>
+                        </div>
+                    </fieldset>
+
+                    <!-- Symptoms Section -->
+                    <fieldset class="form-section">
+                        <legend>Symptoms</legend>
+
+                        <div class="form-group">
+                            <label for="symptoms">Current Symptoms <span class="required">*</span></label>
+                            <textarea id="symptoms" name="symptoms"
+                                placeholder="e.g., fatigue, headache, chest pain (comma-separated)" rows="3"
+                                required></textarea>
+                            <span class="error-message" id="symptomsError"></span>
+                        </div>
+                    </fieldset>
+
+                    <!-- Submit Button -->
+                    <div class="form-actions">
+                        <button type="submit" class="btn-submit" id="submitBtn">
+                            <span class="btn-text">Analyze Health Status</span>
+                            <span class="btn-icon">→</span>
+                        </button>
+                    </div>
+
+                    <!-- Disclaimer -->
+                    <div class="disclaimer">
+                        <p><strong>⚠️ Disclaimer:</strong> This is an AI-based assessment tool and should not replace
+                            professional medical advice. Always consult with a healthcare professional for accurate
+                            diagnosis and treatment.</p>
+                    </div>
+                </form>
+            </div>
+        </main>
+
+        <!-- Results Container -->
+        <div id="resultContainer" class="result-container" style="display: none;">
+            <button class="btn-back" onclick="resetForm()">← Go Back</button>
+
+            <div class="results-wrapper">
+                <!-- Risk Level Card -->
+                <div class="risk-card" id="riskCard">
+                    <div class="risk-icon" id="riskIcon">📊</div>
+                    <h2 id="riskLevel">Risk Level</h2>
+                    <div class="confidence-display">
+                        <span class="confidence-label">Confidence:</span>
+                        <span class="confidence-value" id="confidenceValue">0%</span>
+                    </div>
+                </div>
+
+                <!-- Health Metrics Summary -->
+                <div class="metrics-summary">
+                    <h3>Health Metrics Summary</h3>
+                    <div class="metrics-grid">
+                        <div class="metric-item">
+                            <span class="metric-label">Age</span>
+                            <span class="metric-value" id="metricAge">-</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-label">Gender</span>
+                            <span class="metric-value" id="metricGender">-</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-label">BMI</span>
+                            <span class="metric-value" id="metricBMI">-</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-label">Blood Pressure</span>
+                            <span class="metric-value" id="metricBP">-</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-label">Blood Sugar</span>
+                            <span class="metric-value" id="metricSugar">-</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-label">Symptoms</span>
+                            <span class="metric-value" id="metricSymptoms">-</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Risk Probability Chart -->
+                <div class="probability-chart">
+                    <h3>Risk Distribution</h3>
+                    <div class="chart-bars">
+                        <div class="bar-item">
+                            <div class="bar-label">Low Risk</div>
+                            <div class="bar-container">
+                                <div class="bar" id="barLow" style="background-color: #10b981; width: 0%;"></div>
+                            </div>
+                            <div class="bar-value" id="valueLow">0%</div>
+                        </div>
+                        <div class="bar-item">
+                            <div class="bar-label">Medium Risk</div>
+                            <div class="bar-container">
+                                <div class="bar" id="barMedium" style="background-color: #f59e0b; width: 0%;"></div>
+                            </div>
+                            <div class="bar-value" id="valueMedium">0%</div>
+                        </div>
+                        <div class="bar-item">
+                            <div class="bar-label">High Risk</div>
+                            <div class="bar-container">
+                                <div class="bar" id="barHigh" style="background-color: #ef4444; width: 0%;"></div>
+                            </div>
+                            <div class="bar-value" id="valueHigh">0%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Health Advice -->
+                <div class="advice-section">
+                    <h3>💡 Health Advice</h3>
+                    <div class="advice-list" id="adviceList">
+                        <!-- Populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Recommendations -->
+                <div class="recommendations-section" id="recommendationsSection">
+                    <h3>📋 Recommendations</h3>
+                    <div class="recommendations-list" id="recommendationsList">
+                        <!-- Populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Final Disclaimer -->
+                <div class="final-disclaimer">
+                    <p>⚕️ This assessment helps identify potential health risks. Please consult with a qualified
+                        healthcare professional for proper diagnosis and treatment.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div class="loader" id="loader" style="display: none;">
+        <div class="spinner"></div>
+        <p>Analyzing your health data...</p>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+
+</html>

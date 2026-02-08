@@ -1,0 +1,730 @@
+/* ==========================================
+   Global Styles
+   ========================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #0ea5e9;
+    --primary-dark: #0369a1;
+    --secondary-color: #10b981;
+    --warning-color: #f59e0b;
+    --danger-color: #ef4444;
+    --light-gray: #f3f4f6;
+    --border-gray: #e5e7eb;
+    --text-dark: #1f2937;
+    --text-light: #6b7280;
+    --transition: all 0.3s ease;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: var(--text-dark);
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    z-index: -1;
+}
+
+/* ==========================================
+   Container & Layout
+   ========================================== */
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+.header {
+    text-align: center;
+    color: white;
+    margin-bottom: 40px;
+    animation: slideDown 0.6s ease;
+}
+
+.logo-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.logo {
+    font-size: 60px;
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+}
+
+.header h1 {
+    font-size: 42px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.subtitle {
+    font-size: 16px;
+    opacity: 0.95;
+    font-weight: 300;
+}
+
+/* ==========================================
+   Form Styles
+   ========================================== */
+
+.main-content {
+    animation: fadeIn 0.6s ease 0.2s both;
+}
+
+.form-wrapper {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    margin-bottom: 40px;
+}
+
+.form-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.form-header h2 {
+    font-size: 28px;
+    color: var(--text-dark);
+    margin-bottom: 8px;
+}
+
+.form-header p {
+    color: var(--text-light);
+    font-size: 14px;
+}
+
+.health-form {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* ==========================================
+   Form Sections
+   ========================================== */
+
+.form-section {
+    border: 2px solid var(--border-gray);
+    border-radius: 12px;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: #fafafa;
+}
+
+.form-section legend {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--primary-color);
+    padding: 0 8px;
+    display: inline-block;
+}
+
+/* ==========================================
+   Form Groups & Inputs
+   ========================================== */
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+label {
+    font-weight: 600;
+    color: var(--text-dark);
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.required {
+    color: var(--danger-color);
+    font-size: 16px;
+}
+
+input[type="number"],
+input[type="text"],
+select,
+textarea {
+    padding: 12px 14px;
+    border: 2px solid var(--border-gray);
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 14px;
+    transition: var(--transition);
+    background-color: white;
+}
+
+input[type="number"]:focus,
+input[type="text"]:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1);
+    background-color: #f0f9ff;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 80px;
+    font-family: inherit;
+}
+
+.unit {
+    font-size: 12px;
+    color: var(--text-light);
+    margin-top: -4px;
+}
+
+.info-text {
+    font-size: 12px;
+    color: var(--text-light);
+    margin-top: -4px;
+}
+
+.error-message {
+    color: var(--danger-color);
+    font-size: 12px;
+    display: none;
+}
+
+.error-message.show {
+    display: block;
+}
+
+/* ==========================================
+   Form Actions
+   ========================================== */
+
+.form-actions {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.btn-submit {
+    flex: 1;
+    padding: 14px 28px;
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3);
+}
+
+.btn-submit:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(14, 165, 233, 0.4);
+}
+
+.btn-submit:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.btn-submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.btn-icon {
+    font-size: 18px;
+}
+
+.disclaimer {
+    background-color: #fef3c7;
+    border-left: 4px solid #f59e0b;
+    padding: 15px;
+    border-radius: 6px;
+    font-size: 13px;
+    color: #92400e;
+    line-height: 1.6;
+}
+
+/* ==========================================
+   Results Section
+   ========================================== */
+
+.result-container {
+    animation: fadeIn 0.5s ease;
+}
+
+.btn-back {
+    background-color: white;
+    border: 2px solid var(--border-gray);
+    color: var(--text-dark);
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+.btn-back:hover {
+    background-color: var(--light-gray);
+    border-color: var(--primary-color);
+}
+
+.results-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* ==========================================
+   Risk Card
+   ========================================== */
+
+.risk-card {
+    background: white;
+    border-radius: 16px;
+    padding: 40px;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    animation: scaleIn 0.5s ease;
+}
+
+.risk-icon {
+    font-size: 64px;
+    margin-bottom: 20px;
+    animation: rotate 1s ease infinite;
+}
+
+.risk-card h2 {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    padding: 15px 20px;
+    border-radius: 10px;
+    color: white;
+}
+
+.risk-card.low-risk h2 {
+    background-color: var(--secondary-color);
+}
+
+.risk-card.medium-risk h2 {
+    background-color: var(--warning-color);
+}
+
+.risk-card.high-risk h2 {
+    background-color: var(--danger-color);
+}
+
+.confidence-display {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 18px;
+}
+
+.confidence-label {
+    color: var(--text-light);
+    font-weight: 600;
+}
+
+.confidence-value {
+    font-weight: 700;
+    color: var(--primary-color);
+    font-size: 24px;
+}
+
+/* ==========================================
+   Metrics Summary
+   ========================================== */
+
+.metrics-summary {
+    background: white;
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.metrics-summary h3 {
+    font-size: 20px;
+    color: var(--text-dark);
+    margin-bottom: 20px;
+}
+
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 15px;
+}
+
+.metric-item {
+    background: linear-gradient(135deg, #f0f9ff, #f3e8ff);
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    border: 1px solid var(--border-gray);
+    transition: var(--transition);
+}
+
+.metric-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+}
+
+.metric-label {
+    display: block;
+    font-size: 12px;
+    color: var(--text-light);
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.metric-value {
+    display: block;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+/* ==========================================
+   Probability Chart
+   ========================================== */
+
+.probability-chart {
+    background: white;
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.probability-chart h3 {
+    font-size: 20px;
+    color: var(--text-dark);
+    margin-bottom: 25px;
+}
+
+.chart-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.bar-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.bar-label {
+    width: 100px;
+    font-weight: 600;
+    color: var(--text-dark);
+    font-size: 14px;
+}
+
+.bar-container {
+    flex: 1;
+    height: 30px;
+    background-color: var(--light-gray);
+    border-radius: 15px;
+    overflow: hidden;
+    border: 1px solid var(--border-gray);
+}
+
+.bar {
+    height: 100%;
+    border-radius: 15px;
+    transition: width 1s ease;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 10px;
+}
+
+.bar-value {
+    width: 50px;
+    text-align: right;
+    font-weight: 700;
+    color: var(--text-dark);
+    font-size: 14px;
+}
+
+/* ==========================================
+   Advice & Recommendations
+   ========================================== */
+
+.advice-section,
+.recommendations-section {
+    background: white;
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.advice-section h3,
+.recommendations-section h3 {
+    font-size: 20px;
+    color: var(--text-dark);
+    margin-bottom: 20px;
+}
+
+.advice-list,
+.recommendations-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.advice-item,
+.recommendation-item {
+    padding: 15px;
+    background-color: var(--light-gray);
+    border-left: 4px solid var(--primary-color);
+    border-radius: 6px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text-dark);
+    animation: slideIn 0.4s ease;
+}
+
+.recommendation-item.urgent {
+    border-left-color: var(--danger-color);
+    background-color: #fee2e2;
+}
+
+.recommendation-item.warning {
+    border-left-color: var(--warning-color);
+    background-color: #fef3c7;
+}
+
+.recommendation-item.success {
+    border-left-color: var(--secondary-color);
+    background-color: #f0fdf4;
+}
+
+/* ==========================================
+   Disclaimers
+   ========================================== */
+
+.final-disclaimer {
+    background: linear-gradient(135deg, #fef3c7, #fecaca);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    border: 1px solid #fca5a5;
+    color: #7c2d12;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+/* ==========================================
+   Loading Spinner
+   ========================================== */
+
+.loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+    backdrop-filter: blur(4px);
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+.loader p {
+    color: white;
+    margin-top: 20px;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+/* ==========================================
+   Animations
+   ========================================== */
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes rotate {
+
+    0%,
+    100% {
+        transform: rotate(0deg);
+    }
+
+    50% {
+        transform: rotate(10deg);
+    }
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ==========================================
+   Responsive Design
+   ========================================== */
+
+@media (max-width: 768px) {
+    .form-wrapper {
+        padding: 25px;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .header h1 {
+        font-size: 32px;
+    }
+
+    .metrics-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .logo-section {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .risk-card h2 {
+        font-size: 28px;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+
+    .form-wrapper {
+        padding: 20px;
+    }
+
+    .header h1 {
+        font-size: 28px;
+    }
+
+    .logo {
+        font-size: 48px;
+    }
+
+    .metrics-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-section {
+        padding: 15px;
+    }
+
+    .bar-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .bar-container {
+        width: 100%;
+    }
+
+    .bar-value {
+        width: 100%;
+        text-align: left;
+    }
+}
